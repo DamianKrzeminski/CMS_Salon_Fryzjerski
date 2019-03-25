@@ -1,0 +1,57 @@
+<?php
+$clients_model = $this->getModel('clients');
+$clients = $clients_model->getAll();
+?>
+<?php include_once ('elements/header.phtml');?>
+<div class="container-fluid">
+    <div class="row content">
+        <?php include ('elements/menu.phtml');?>
+        <div class="col-sm-10">
+            <h1>
+                <small><?php echo $this->getPageLabel() . ' (' . count($clients) . ')';?></small>
+            </h1>
+            <div class="up-button">
+                <a href="?action=add_client" data-toggle="tooltip" title="Dodaj Klienta" data-placement="left">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </a>
+            </div>
+            <hr>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Numer Telefonu</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($clients as $nr=>$client):?>
+                    <tr>
+                        <th scope="row"><?php echo $nr+1;?></th>
+                        <td><?php echo $client->getFirstname();?></td>
+                        <td><?php echo $client->getLastname();?></td>
+                        <td><?php echo $client->getPhone();?></td>
+                        <td>
+                            <a href="?action=edit_client&id=<?php echo $client->getId();?>" data-toggle="tooltip" title="Edytuj" data-placement="left">
+                                <button type="button" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </a>
+                            <a href="?action=delete_client&id=<?php echo $client->getId();?>" data-toggle="tooltip" title="Usuń" data-placement="right">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php include ('elements/footer.phtml');?>

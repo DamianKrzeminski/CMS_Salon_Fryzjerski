@@ -1,0 +1,32 @@
+<div class="col-sm-2 sidenav">
+    <ul class="nav nav-pills nav-stacked">
+        <li <?php if(!isset($_GET['action']) || $_GET['action']=='home') echo 'class="active"'?>> 
+            <a href="?action=home"><span class="glyphicon glyphicon-home"></span>   Home</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && in_array($_GET['action'], ['client_list', 'delete_client'])) echo 'class="active"';?>>  
+            <a href="?action=client_list"><span class="glyphicon glyphicon-user"></span>   Klienci</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && $_GET['action']=='add_client') echo 'class="active"';?>>    
+            <a href="?action=add_client"><span class="glyphicon glyphicon-plus"></span>   Dodaj Klienta</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && in_array($_GET['action'], ['visit_list', 'delete_visit'])) echo 'class="active"';?>>
+            <a href="?action=visit_list"><span class="glyphicon glyphicon-list-alt"></span>   Wizyty</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && $_GET['action']=='add_visit') echo 'class="active"';?>>
+            <a href="?action=add_visit"><span class="glyphicon glyphicon-plus"></span>   Dodaj Wizytę</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && in_array($_GET['action'], ['product_list', 'delete_product'])) echo 'class="active"';?>>
+            <a href="?action=product_list"><span class="glyphicon glyphicon-th-list"></span>   Produkty</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && $_GET['action']=='add_product') echo 'class="active"';?>>
+            <a href="?action=add_product"><span class="glyphicon glyphicon-plus"></span>   Dodaj Produkt</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && in_array($_GET['action'], ['category_list', 'delete_category'])) echo 'class="active"';?>>
+            <a href="?action=category_list"><span class="glyphicon glyphicon-list"></span>   Kategorie</a>
+        </li>
+        <li <?php if(isset($_GET['action']) && $_GET['action']=='add_category') echo 'class="active"';?>>
+            <a href="?action=add_category"><span class="glyphicon glyphicon-plus"></span>   Dodaj Kategorię</a>
+        </li>
+    </ul>
+</div>
+   

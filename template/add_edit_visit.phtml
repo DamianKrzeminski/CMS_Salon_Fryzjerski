@@ -1,0 +1,54 @@
+<?php
+$visits_model = $this->getModel('visits');
+$visit = $visits_model->getOneById($this->element_id);
+?>
+<?php include_once('elements/header.phtml');?>
+<div class="container-fluid">
+    <div class="row content">
+        <?php include_once('elements/menu.phtml');?>
+        <div class="col-sm-10">
+            <h1>
+                <small><?php echo $this->getPageLabel();?></small>
+            </h1>
+            <hr>
+            <form action="?action=visit_list" method="post">
+                <input type="hidden" name="model" value="visits"/>
+                <input type="hidden" name="id" value="<?php if($this->action == 'edit_visit') echo $visit->getId();?>"/>
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <label for="firstname">Imie</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Wprowadź Imie Klienta" required value="<?php if(!empty($visit)) echo $visit->getFirstname();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Nazwisko</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Wprowadź Nazwisko Klienta" required value="<?php if(!empty($visit)) echo $visit->getLastname();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Numer Telefonu</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Wprowadź Numer Telefonu" required value="<?php if(!empty($visit)) echo $visit->getPhone();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="vdate">Data</label>
+                        <input type="text" class="form-control" name="vdate" id="vdate" placeholder="Wprowadź Datę" required value="<?php if(!empty($visit)) echo $visit->getVdate();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="vtime">Godzina</label>
+                        <input type="text" class="form-control" name="vtime" id="vtime" placeholder="Wprowadź Godzinę" required value="<?php if(!empty($visit)) echo $visit->getVtime();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Cena</label>
+                        <input type="text" class="form-control" name="price" id="price" placeholder="Wprowadź Cenę" required value="<?php if(!empty($visit)) echo $visit->getPrice();?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Notatka</label>
+                        <textarea class="form-control" name="note" id="note" rows="6" placeholder="Wprowadź notatkę"><?php if(!empty($visit)) echo $visit->getNote();?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-right">Zapisz</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php include_once('elements/footer.phtml');?>
