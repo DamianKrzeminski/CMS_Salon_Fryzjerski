@@ -18,39 +18,59 @@ $clients = $clients_model->getAll();
                 </a>
             </div>
             <hr>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Imie</th>
-                        <th>Nazwisko</th>
-                        <th>Numer Telefonu</th>
-                        <th>Akcje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($clients as $nr=>$client):?>
-                    <tr>
-                        <th scope="row"><?php echo $nr+1;?></th>
-                        <td><?php echo $client->getFirstname();?></td>
-                        <td><?php echo $client->getLastname();?></td>
-                        <td><?php echo $client->getPhone();?></td>
-                        <td>
-                            <a href="?action=edit_client&id=<?php echo $client->getId();?>" data-toggle="tooltip" title="Edytuj" data-placement="left">
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </a>
-                            <a href="?action=delete_client&id=<?php echo $client->getId();?>" data-toggle="tooltip" title="Usuń" data-placement="right">
-                                <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
-                </tbody>
-            </table>
+            <div ng-app="clientApp" ng-controller="clientController">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="searchFirstname" placeholder="Szukaj imię...">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="searchLastname" placeholder="Szukaj nazwisko...">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" ng-model="searchPhone" placeholder="Szukaj numer telefonu...">
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th ng-click="orderByMe('firstname')" title="Sortuj imię">Imie</th>
+                            <th ng-click="orderByMe('lastname')" title="Sortuj nazwisko">Nazwisko</th>
+                            <th ng-click="orderByMe('phone')" title="Sortuj numer telefonu">Numer Telefonu</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in client_list | filter: {firstname: searchFirstname, lastname: searchLastname, phone: searchPhone} | orderBy: clientOrderBy">
+                            <th>{{$index+1}}</th>
+                            <td>{{x.firstname}}</td>
+                            <td>{{x.lastname}}</td>
+                            <td>{{x.phone}}</td>
+                            <td>
+                                <a href="?action=edit_client&id={{x.id}}" data-toggle="tooltip" title="Edytuj" data-placement="left">
+                                    <button type="button" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </a>
+                                <a href="?action=delete_client&id={{x.id}}" data-toggle="tooltip" title="Usuń" data-placement="right">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <script>
+                var app = angular.module("clientApp", []);
+                app.controller("clientController", function($scope){
+                    $scope.client_list = <?php echo json_encode($clients);?>;
+                    $scope.orderByMe = function(x){
+                        $scope.clientOrderBy = x;
+                    }
+                });
+            </script>
         </div>
     </div>
 </div>

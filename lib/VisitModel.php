@@ -9,7 +9,7 @@ class VisitModel implements ModelInterface{
     
     public function getAll(){
         if(!isset($this->visits)){
-            $this->visits = $this->db->getDb()->query("SELECT * FROM visit")->fetchAll(PDO::FETCH_CLASS, 'Visit');
+            $this->visits = $this->db->getDb()->query("SELECT * FROM visit")->fetchAll(PDO::FETCH_ASSOC);
         }
         return $this->visits;
     }

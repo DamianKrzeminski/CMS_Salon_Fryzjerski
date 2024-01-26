@@ -9,7 +9,7 @@ class ClientModel implements ModelInterface{
      
     public function getAll() {
         if(!isset($this->clients)){
-            $this->clients = $this->db->getDb()->query("SELECT * FROM clients")->fetchAll(PDO::FETCH_CLASS, 'Client');
+            $this->clients = $this->db->getDb()->query("SELECT * FROM clients")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $this->clients;

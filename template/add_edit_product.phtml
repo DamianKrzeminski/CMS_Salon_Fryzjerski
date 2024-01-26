@@ -32,7 +32,7 @@ $categories_model = $this->getModel('categories');
                             <?php else:?>
                             <option value="" disabled selected>Wybierz Kategorię</option>
                             <?php endif;?>
-                            <?php foreach($categories_model->getAll() as $category):?>
+                            <?php foreach($categories_model->getAllClass() as $category):?>
                             <option value="<?php echo $category->getCategory();?>"><?php echo $category->getCategory();?></option>
                             <?php endforeach;?>
                         </select>

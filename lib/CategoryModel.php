@@ -1,17 +1,25 @@
 <?php
-class CategoryModel implements ModelInterface{
+class CategoryModel implements CategoryModelInterface{
     private $db;
     private $categories;
+    private $categories_class;
     
     public function __construct(){
         $this->db = Database::getInstance();
     }
     
-    public function getAll(){
-        if(!isset($this->products)){
-            $this->products = $this->db->getDb()->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_CLASS, 'Category');
+    public function getAllAssoc(){
+        if(!isset($this->categories)){
+            $this->categories = $this->db->getDb()->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC);
         }
-        return $this->products;
+        return $this->categories;
+    }
+    
+    public function getAllClass(){
+        if(!isset($this->categories_class)){
+            $this->categories_class = $this->db->getDb()->query("SELECT * FROM categories")->fetchAll(PDO::FETCH_CLASS, 'Category');
+        }
+        return $this->categories_class;
     }
     
     public function getOneById($id){

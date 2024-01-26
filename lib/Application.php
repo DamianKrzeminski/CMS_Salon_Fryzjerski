@@ -41,12 +41,20 @@ class Application implements ApplicationInterface{
         switch ($this->request->getAction()){
             case 'delete_client':
                 $this->model['clients']->delete($this->request->getId());
+                header('Location:?action=client_list');
+                break;
             case 'delete_visit':
                 $this->model['visits']->delete($this->request->getId());
+                header('Location:?action=visit_list');
+                break;
             case 'delete_product':
                 $this->model['products']->delete($this->request->getId());
+                header('Location:?action=product_list');
+                break;
             case 'delete_category':
                 $this->model['categories']->delete($this->request->getId());
+                header('Location:?action=categorie_list');
+                break;
             default:
                 $this->template->setModel($this->model);
                 $this->template->setAction($this->request->getAction());

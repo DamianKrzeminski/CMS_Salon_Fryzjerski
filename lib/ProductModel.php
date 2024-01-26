@@ -10,7 +10,7 @@ class ProductModel implements ProductModelInterface{
     
     public function getAll(){
         if(!isset($this->products)){
-            $this->products = $this->db->getDb()->query("SELECT * FROM products")->fetchAll(PDO::FETCH_CLASS, 'Product');
+            $this->products = $this->db->getDb()->query("SELECT * FROM products")->fetchAll(PDO::FETCH_ASSOC);
         }
         return $this->products;
     }
@@ -23,7 +23,7 @@ class ProductModel implements ProductModelInterface{
         $query->bindParam(':category', $category);
         $query->execute();
         if(!isset($this->cat_products)){
-            $this->cat_products = $query->fetchAll(PDO::FETCH_CLASS, 'Product');
+            $this->cat_products = $query->fetchAll(PDO::FETCH_ASSOC);
         }
         return $this->cat_products;
     }
